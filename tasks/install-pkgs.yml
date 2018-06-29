@@ -1,0 +1,7 @@
+---
+
+- name: Install FreeIPA client packages
+  package:
+    name: "{{ freeipa_client_pkgs }}"
+    state: present
+    update_cache: "{{ omit if ansible_pkg_mgr == 'dnf' else 'yes' }}"

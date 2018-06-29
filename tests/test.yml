@@ -1,0 +1,24 @@
+---
+
+- hosts: localhost
+  remote_user: root
+  gather_facts: true
+
+  vars:
+    freeipa_client_domain: example.com
+    freeipa_client_server: ipa.example.com
+    freeipa_client_realm: EXAMPLE.COM
+    freeipa_client_principal: admin
+    freeipa_client_password: Passw0rd
+    freeipa_client_fqdn: srv-1-eu-central-1.example.com
+    freeipa_client_install_options:
+      - "--domain={{ freeipa_client_domain }}"
+      - "--server={{ freeipa_client_server }}"
+      - "--realm={{ freeipa_client_realm }}"
+      - "--principal={{ freeipa_client_principal }}"
+      - "--password={{ freeipa_client_password }}"
+      - '--mkhomedir'
+      - "--hostname={{ freeipa_client_fqdn | default(ansible_fqdn) }}"
+
+  roles:
+    - timorunge.freeipa-client
