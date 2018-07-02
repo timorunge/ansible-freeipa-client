@@ -21,4 +21,4 @@
       - "--hostname={{ freeipa_client_fqdn | default(ansible_fqdn) }}"
 
   roles:
-    - timorunge.freeipa-client
+    - timorunge.freeipa_client

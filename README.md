@@ -1,4 +1,4 @@
-freeipa-client
+freeipa_client
 ==============
 
 This role is building and installing an FreeIPA Client according to your needs.
@@ -27,7 +27,7 @@ Install
 -------
 
 ```sh
-ansible-galaxy install timorunge.freeipa-client
+ansible-galaxy install timorunge.freeipa_client
 ```
 
 Role Variables
@@ -90,7 +90,7 @@ document](#freeipa-client-install-options) or in the online
     freeipa_client_password: Passw0rd
     freeipa_client_fqdn: srv-1-eu-central-1.example.com
   roles:
-    - timorunge.freeipa-client
+    - timorunge.freeipa_client
 ```
 
 ## 2) Install the FreeIPA server with custom install options
@@ -110,7 +110,7 @@ document](#freeipa-client-install-options) or in the online
       - '--ip-address=172.20.1.2'
       - '--ip-address=172.20.2.2'
   roles:
-    - timorunge.freeipa-client
+    - timorunge.freeipa_client
 ```
 
 ## 3) Install the FreeIPA client and add multiple IPA servers
@@ -132,7 +132,7 @@ document](#freeipa-client-install-options) or in the online
     freeipa_client_install_options:
       - "--server={{ freeipa_client_server | join(' --server=') }}"
   roles:
-    - timorunge.freeipa-client
+    - timorunge.freeipa_client
 ```
 
 FreeIPA client install options
