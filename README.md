@@ -228,7 +228,7 @@ Dependencies
 ------------
 
 This role requires an up and running
-[FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa-server/)
+[FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa_server/)
 ([Github Repo](https://github.com/timorunge/ansible-freeipa-server)).
 
 License
