@@ -8,5 +8,6 @@
     - "{{ ansible_os_family }}.yml"
 
 - include_tasks: install-pkgs.yml
+  when: freeipa_client_install_pkgs
 
 - include_tasks: freeipa-client-install.yml

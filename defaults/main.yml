@@ -1,5 +1,8 @@
 ---
 
+# Install FreeIPA packages (set to false if you're using timorunge.freeipa)
+freeipa_client_install_pkgs: true
+
 # The base command for the FreeIPA client installation
 freeipa_client_install_base_command: ipa-client-install --unattended
 
