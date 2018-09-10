@@ -12,7 +12,7 @@ stable release (2.6.0).
 You can simply use pip to install (and define) the latest stable version:
 
 ```sh
-pip install ansible==2.6.0
+pip install ansible==2.6.4
 ```
 
 All platform requirements are listed in the metadata file.
