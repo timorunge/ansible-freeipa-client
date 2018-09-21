@@ -6,10 +6,11 @@ This role is building and installing an FreeIPA Client according to your needs.
 Requirements
 ------------
 
-This role requires Ansible 2.4.0 or higher. It's fully tested with the latest
-stable release (2.6.0).
+This role requires
+[Ansible 2.5.0](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_5.html)
+or higher.
 
-You can simply use pip to install (and define) the latest stable version:
+You can simply use pip to install (and define) a stable version:
 
 ```sh
 pip install ansible==2.6.4
@@ -38,16 +39,22 @@ running (without customisation). Those variables don't have any default values:
 
 ```yaml
 # Primary DNS domain of the IPA deployment
+# Type: Str
 freeipa_client_domain: example.com
 # The hostname of this machine (FQDN)
+# Type: Str
 freeipa_client_fqdn: srv-1-eu-central-1.example.com
 # Password to join the IPA realm
+# Type: Str
 freeipa_client_password: Passw0rd
 # Principal to use to join the IPA realm
+# Type: Str
 freeipa_client_principal: admin
 # Kerberos realm name of the IPA deployment
+# Type: Str
 freeipa_client_realm: EXAMPLE.COM
 # FQDN of IPA server
+# Type: Str
 freeipa_client_server: ipa.example.com
 ```
 
@@ -56,18 +63,20 @@ them are as follows. (For all variables, take a look at [defaults/main.yml](defa
 
 ```yaml
 # The base command for the FreeIPA installation
+# Type: Str
 freeipa_client_install_base_command: ipa-client-install --unattended
 
 # The default FreeIPA installation options
+# Type: List
 freeipa_client_install_options:
   - "--domain={{ freeipa_client_domain }}"
   - "--server={{ freeipa_client_server }}"
   - "--realm={{ freeipa_client_realm }}"
   - "--principal={{ freeipa_client_principal }}"
   - "--password={{ freeipa_client_password }}"
-  - '--mkhomedir'
+  - "--mkhomedir"
   - "--hostname={{ freeipa_client_fqdn }}"
-  - '--force-join'
+  - "--force-join"
 ```
 
 Examples
@@ -105,10 +114,10 @@ document](#freeipa-client-install-options) or in the online
     freeipa_client_password: Passw0rd
     freeipa_client_fqdn: srv-1-eu-central-1.example.com
     freeipa_client_install_options:
-      - '--no-ntp'
-      - '--ssh-trust-dns'
-      - '--ip-address=172.20.1.2'
-      - '--ip-address=172.20.2.2'
+      - "--no-ntp"
+      - "--ssh-trust-dns"
+      - "--ip-address=172.20.1.2"
+      - "--ip-address=172.20.2.2"
   roles:
     - timorunge.freeipa_client
 ```

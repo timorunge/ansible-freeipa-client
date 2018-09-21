@@ -1,4 +1,6 @@
 ---
 
+# Package list for FreeIPA client installation
+# Type: List
 freeipa_client_pkgs:
   - ipa-client

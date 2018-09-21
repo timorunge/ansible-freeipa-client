@@ -1,9 +1,7 @@
 ---
 
 - hosts: localhost
-  remote_user: root
-  gather_facts: true
-
+  gather_facts: True
   vars:
     freeipa_client_domain: example.com
     freeipa_client_server: ipa.example.com
@@ -17,8 +15,7 @@
       - "--realm={{ freeipa_client_realm }}"
       - "--principal={{ freeipa_client_principal }}"
       - "--password={{ freeipa_client_password }}"
-      - '--mkhomedir'
+      - "--mkhomedir"
       - "--hostname={{ freeipa_client_fqdn | default(ansible_fqdn) }}"
-
   roles:
     - timorunge.freeipa_client
