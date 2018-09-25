@@ -1,7 +1,15 @@
 freeipa_client
 ==============
 
-This role is building and installing an FreeIPA Client according to your needs.
+This role is installing and configuring the FreeIPA Client according to
+your needs.
+
+In combination with
+[`freeipa`](https://galaxy.ansible.com/timorunge/freeipa)
+([Github](https://github.com/timorunge/ansible-freeipa)) it's
+possible (and tested) to use `freeipa_client` with the latest version of
+FreeIPA itself on Debian 9.4 and Ubuntu >= 18.04 (take a look at
+the [example section](https://github.com/timorunge/ansible-freeipa#5-install-freeipa-with-timorungesssd-and-timorungefreeipa_client)).
 
 Requirements
 ------------
@@ -21,7 +29,7 @@ All platform requirements are listed in the metadata file.
 In order to setup this role correctly it's required that you can communicate on
 the
 [required ports](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/installing-ipa#prereq-ports-list)
-to an [FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa-server/)
+to an [FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa-server)
 ([Github Repo](https://github.com/timorunge/ansible-freeipa-server)).
 
 Install
@@ -147,35 +155,58 @@ document](#freeipa-client-install-options) or in the online
 FreeIPA client install options
 ------------------------------
 
-An overview of the install options for ipa-client-install (4.3.1).
+An overview of the install options for ipa-client-install (4.6.4).
 
 ```sh
+Usage: ipa-client-install [options]
+
 Options:
   --version             show program's version number and exit
   -h, --help            show this help message and exit
+  -U, --unattended      unattended (un)installation never prompts the user
+  --uninstall           uninstall an existing installation. The uninstall can
+                        be run with --unattended option
 
-  basic options:
-    --domain=DOMAIN     domain name
-    --server=SERVER     IPA server
-    --realm=REALM_NAME  realm name
-    --fixed-primary     Configure sssd to use fixed server as primary IPA
-                        server
+  Basic options:
     -p PRINCIPAL, --principal=PRINCIPAL
                         principal to use to join the IPA realm
+    --ca-cert-file=FILE
+                        load the CA certificate from this file
+    --ip-address=IP_ADDRESS
+                        Specify IP address that should be added to DNS. This
+                        option can be used multiple times
+    --all-ip-addresses  All routable IP addresses configured on any interface
+                        will be added to DNS
+    --domain=DOMAIN_NAME
+                        primary DNS domain of the IPA deployment (not
+                        necessarily related to the current hostname)
+    --server=SERVER     FQDN of IPA server
+    --realm=REALM_NAME  Kerberos realm name of the IPA deployment (typically
+                        an upper-cased name of the primary DNS domain)
+    --hostname=HOST_NAME
+                        The hostname of this machine (FQDN). If specified, the
+                        hostname will be set and the system configuration will
+                        be updated to persist over reboot. By default the
+                        result of getfqdn() call from Python's socket module
+                        is used.
+
+  Client options:
     -w PASSWORD, --password=PASSWORD
                         password to join the IPA realm (assumes bulk password
                         unless principal is also set)
+    -W                  Prompt for a password to join the IPA realm
+    --noac              do not modify the nsswitch.conf and PAM configuration
+    -f, --force         force setting of LDAP/Kerberos conf
+    --configure-firefox
+                        configure Firefox to use IPA domain credentials
+    --firefox-dir=FIREFOX_DIR
+                        specify directory where Firefox is installed (for
+                        example: '/usr/lib/firefox')
     -k KEYTAB, --keytab=KEYTAB
                         path to backed up keytab from previous enrollment
-    -W                  Prompt for a password to join the IPA realm
     --mkhomedir         create home directories for users on their first login
-    --hostname=HOSTNAME
-                        The hostname of this machine (FQDN). If specified, the
-                        hostname will be set and the system configuration will
-                        be updated to persist over reboot. By default a
-                        nodename result from uname(2) is used.
     --force-join        Force client enrollment even if already enrolled
-    --ntp-server=NTP_SERVERS
+    --ntp-server=NTP_SERVER
                         ntp server to use. This option can be used multiple
                         times
     -N, --no-ntp        do not configure ntp
@@ -189,29 +220,13 @@ Options:
     --no-sshd           do not configure OpenSSH server
     --no-sudo           do not configure SSSD as data source for sudo
     --no-dns-sshfp      do not automatically create DNS SSHFP records
-    --noac              do not modify the nsswitch.conf and PAM configuration
-    -f, --force         force setting of LDAP/Kerberos conf
     --kinit-attempts=KINIT_ATTEMPTS
                         number of attempts to obtain host TGT (defaults to 5).
-    -d, --debug         print debugging information
-    -U, --unattended    unattended (un)installation never prompts the user
-    --ca-cert-file=CA_CERT_FILE
-                        load the CA certificate from this file
     --request-cert      request certificate for the machine
-    --automount-location=LOCATION
-                        Automount location
-    --configure-firefox
-                        configure Firefox to use IPA domain credentials
-    --firefox-dir=FIREFOX_DIR
-                        specify directory where Firefox is installed (for
-                        example: '/usr/lib/firefox')
-    --ip-address=IP_ADDRESSES
-                        Specify IP address that should be added to DNS. This
-                        option can be used multiple times
-    --all-ip-addresses  All routable IP addresses configured on any inteface
-                        will be added to DNS
 
   SSSD options:
+    --fixed-primary     Configure sssd to use fixed server as primary IPA
+                        server
     --permit            disable access rules by default, permit all access.
     --enable-dns-updates
                         Configures the machine to attempt dns updates when the
@@ -219,13 +234,17 @@ Options:
     --no-krb5-offline-passwords
                         Configure SSSD not to store user password when the
                         server is offline
-    -S, --no-sssd       Do not configure the client to use SSSD for
-                        authentication
     --preserve-sssd     Preserve old SSSD configuration if possible
 
-  uninstall options:
-    --uninstall         uninstall an existing installation. The uninstall can
-                        be run with --unattended option
+  Automount options:
+    --automount-location=AUTOMOUNT_LOCATION
+                        Automount location
+
+  Logging and output options:
+    -v, --verbose       print debugging information
+    -d, --debug         alias for --verbose (deprecated)
+    -q, --quiet         output only errors
+    --log-file=FILE     log to the given file
 ```
 
 Testing
@@ -241,7 +260,7 @@ Dependencies
 ------------
 
 This role requires an up and running
-[FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa_server/)
+[FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa_server)
 ([Github Repo](https://github.com/timorunge/ansible-freeipa-server)).
 
 License
