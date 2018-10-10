@@ -1,5 +1,4 @@
-freeipa_client
-==============
+# freeipa_client
 
 This role is installing and configuring the FreeIPA Client according to
 your needs.
@@ -11,8 +10,7 @@ possible (and tested) to use `freeipa_client` with the latest version of
 FreeIPA itself on Debian 9.4 and Ubuntu >= 18.04 (take a look at
 the [example section](https://github.com/timorunge/ansible-freeipa#5-install-freeipa-with-timorungesssd-and-timorungefreeipa_client)).
 
-Requirements
-------------
+## Requirements
 
 This role requires
 [Ansible 2.5.0](https://docs.ansible.com/ansible/devel/roadmap/ROADMAP_2_5.html)
@@ -32,15 +30,13 @@ the
 to an [FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa-server)
 ([Github Repo](https://github.com/timorunge/ansible-freeipa-server)).
 
-Install
--------
+## Install
 
 ```sh
 ansible-galaxy install timorunge.freeipa_client
 ```
 
-Role Variables
---------------
+## Role Variables
 
 It is required to set the following variables in order to get this role up and
 running (without customisation). Those variables don't have any default values:
@@ -87,15 +83,14 @@ freeipa_client_install_options:
   - "--force-join"
 ```
 
-Examples
---------
+## Examples
 
 To keep the document lean the install options are stripped.
 You can find the install options either in [this
 document](#freeipa-client-install-options) or in the online
 [man page for ipa-client-install](https://linux.die.net/man/1/ipa-client-install).
 
-## 1) Install the FreeIPA client with default settings
+### 1) Install the FreeIPA client with default settings
 
 ```yaml
 - hosts: freeipa-clients
@@ -110,7 +105,7 @@ document](#freeipa-client-install-options) or in the online
     - timorunge.freeipa_client
 ```
 
-## 2) Install the FreeIPA server with custom install options
+### 2) Install the FreeIPA server with custom install options
 
 ```yaml
 - hosts: freeipa-clients
@@ -130,7 +125,7 @@ document](#freeipa-client-install-options) or in the online
     - timorunge.freeipa_client
 ```
 
-## 3) Install the FreeIPA client and add multiple IPA servers
+### 3) Install the FreeIPA client and add multiple IPA servers
 
 ```yaml
 - hosts: freeipa-clients
@@ -152,8 +147,7 @@ document](#freeipa-client-install-options) or in the online
     - timorunge.freeipa_client
 ```
 
-FreeIPA client install options
-------------------------------
+## FreeIPA client install options
 
 An overview of the install options for ipa-client-install (4.6.4).
 
@@ -247,8 +241,7 @@ Options:
     --log-file=FILE     log to the given file
 ```
 
-Testing
--------
+## Testing
 
 [![Build Status](https://travis-ci.org/timorunge/ansible-freeipa-client.svg?branch=master)](https://travis-ci.org/timorunge/ansible-freeipa-client)
 
@@ -256,18 +249,26 @@ Travis tests are done with [Docker](https://www.docker.com) and
 [docker_test_runner](https://github.com/timorunge/docker-test-runner). Tests
 on Travis are performing linting and syntax checks.
 
-Dependencies
-------------
+For further details and additional checks take a look at the
+[docker_test_runner configuration](tests/docker_test_runner.yml) and the
+[Docker entrypoint](tests/docker/docker-entrypoint.sh).
+
+```sh
+# Testing locally:
+curl https://raw.githubusercontent.com/timorunge/docker-test-runner/master/install.sh | sh
+./docker_test_runner.py -f tests/docker_test_runner.yml
+```
+
+## Dependencies
 
 This role requires an up and running
 [FreeIPA Server](https://galaxy.ansible.com/timorunge/freeipa_server)
 ([Github Repo](https://github.com/timorunge/ansible-freeipa-server)).
 
-License
--------
+## License
+
 BSD
 
-Author Information
-------------------
+## Author Information
 
 - Timo Runge
