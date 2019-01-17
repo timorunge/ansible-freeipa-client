@@ -19,7 +19,7 @@ or higher.
 You can simply use pip to install (and define) a stable version:
 
 ```sh
-pip install ansible==2.7.2
+pip install ansible==2.7.5
 ```
 
 All platform requirements are listed in the metadata file.
