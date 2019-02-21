@@ -1,7 +1,7 @@
 ---
 
 - hosts: localhost
-  gather_facts: True
+  gather_facts: true
   vars:
     freeipa_client_domain: example.com
     freeipa_client_server: ipa.example.com

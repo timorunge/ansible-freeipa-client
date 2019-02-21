@@ -1,8 +1,8 @@
 ---
 
-# Install FreeIPA packages (set to False if you're using `timorunge.freeipa`)
+# Install FreeIPA packages (set to false if you're using `timorunge.freeipa`)
 # Type: Bool
-freeipa_client_install_pkgs: True
+freeipa_client_install_pkgs: true
 
 # The base command for the FreeIPA client installation
 # Type: Str
