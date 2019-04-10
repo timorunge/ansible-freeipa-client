@@ -267,7 +267,7 @@ This role requires an up and running
 
 ## License
 
-[BSD 3-Clause "New" or "Revised" License](https://spdx.org/licenses/BSD-3-Clause.html)
+[BSD 3-Clause "New" or "Revised" License](LICENSE)
 
 ## Author Information
 
