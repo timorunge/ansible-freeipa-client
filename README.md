@@ -1,3 +1,7 @@
+> **Status: Archived.**
+>
+> This repository is no longer maintained and is kept for reference only.
+
 # freeipa_client
 
 This role is installing and configuring the FreeIPA Client according to
@@ -241,24 +245,6 @@ Options:
     --log-file=FILE     log to the given file
 ```
 
-## Testing
-
-[![Build Status](https://travis-ci.org/timorunge/ansible-freeipa-client.svg?branch=master)](https://travis-ci.org/timorunge/ansible-freeipa-client)
-
-Travis tests are done with [Docker](https://www.docker.com) and
-[docker_test_runner](https://github.com/timorunge/docker-test-runner). Tests
-on Travis are performing linting and syntax checks.
-
-For further details and additional checks take a look at the
-[docker_test_runner configuration](tests/docker_test_runner.yml) and the
-[Docker entrypoint](tests/docker/docker-entrypoint.sh).
-
-```sh
-# Testing locally:
-curl https://raw.githubusercontent.com/timorunge/docker-test-runner/master/install.sh | sh
-./docker_test_runner.py -f tests/docker_test_runner.yml
-```
-
 ## Dependencies
 
 This role requires an up and running
@@ -268,7 +254,3 @@ This role requires an up and running
 ## License
 
 [BSD 3-Clause "New" or "Revised" License](LICENSE)
-
-## Author Information
-
-- Timo Runge
